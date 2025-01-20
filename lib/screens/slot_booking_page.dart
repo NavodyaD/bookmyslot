@@ -1,11 +1,66 @@
 import 'package:bookmyslot/widgets/primary_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class SlotBookingPage extends StatelessWidget {
+class SlotBookingPage extends StatefulWidget {
   final int parkingSlotId;
-  final double price = 5.00;
 
   SlotBookingPage({required this.parkingSlotId});
+
+  @override
+  State<SlotBookingPage> createState() => _SlotBookingPageState();
+}
+
+class _SlotBookingPageState extends State<SlotBookingPage> {
+  final double price = 5.00;
+  late int slotId;
+
+  @override
+  void initState() {
+    super.initState();
+    slotId = widget.parkingSlotId;
+  }
+
+  final TextEditingController vehicleNumberController = TextEditingController();
+  final TextEditingController driverNameController = TextEditingController();
+
+  void _bookSlot() async {
+    final vehicleNumber = vehicleNumberController.text;
+    final driverName = driverNameController.text;
+    final currentTime = DateTime.now();
+
+    if (vehicleNumber.isEmpty || driverName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields!')),
+      );
+      return;
+    }
+
+    try {
+      // create unique id
+      String bookingId = FirebaseFirestore.instance.collection('Bookings').doc().id;
+
+      // map data to store
+      Map<String, dynamic> bookingData = {
+        'bookingId': bookingId,
+        'parkingSlotId': slotId,
+        'price': price,
+        'vehicleNumber': vehicleNumber,
+        'driverName': driverName,
+        'dateTime': currentTime,
+      };
+
+      await FirebaseFirestore.instance.collection('Bookings').doc(bookingId).set(bookingData);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Booking Confirmed!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to book. Please try again.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +76,7 @@ class SlotBookingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Parking Slot ID: $parkingSlotId',
+                'Parking Slot ID: ${widget.parkingSlotId}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -41,6 +96,20 @@ class SlotBookingPage extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your vehicle number',
                 ),
+                controller: vehicleNumberController,
+              ),
+
+              Text(
+                'Driver Name',
+                style: TextStyle(fontSize: 24),
+              ),
+
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the driver name',
+                ),
+                controller: driverNameController,
               ),
 
               SizedBox(height: 40),
@@ -101,11 +170,7 @@ class SlotBookingPage extends StatelessWidget {
               Center(
                 child: PrimaryAppButton(
                   buttonText: 'Book Now',
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Booking Confirmed!')),
-                    );
-                  },
+                  onPressed: _bookSlot,
                 ),
               ),
             ],
