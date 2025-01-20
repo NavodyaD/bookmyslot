@@ -1,3 +1,4 @@
+import 'package:bookmyslot/screens/slot_booking_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/parking_slot_tile.dart';
@@ -14,23 +15,54 @@ class _ParkingPageState extends State<ParkingPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 10,
+          title: Text('You want to park?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          centerTitle: true,
+        ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Parking Name: Galle Town Parking Space',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text.rich(
+                TextSpan(
+                  text: 'Parking Name: ',
+                  style: TextStyle(fontSize: 20),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Galle Town Parking Space',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
+
               SizedBox(height: 8),
-              Text(
-                'Parking Address: Cross Road, Galle Town, Galle',
-                style: TextStyle(fontSize: 18, color: Colors.grey),
+              Text.rich(
+                TextSpan(
+                  text: 'Parking Address: ',
+                  style: TextStyle(fontSize: 16),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Cross Street, Galle Town, Galle',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                'Parking Slots Count: 4',
-                style: TextStyle(fontSize: 18, color: Colors.grey),
+              Text.rich(
+                TextSpan(
+                  text: 'Slots Count: ',
+                  style: TextStyle(fontSize: 16),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '4',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 20),
 
@@ -49,8 +81,20 @@ class _ParkingPageState extends State<ParkingPage> {
                   ),
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return ParkingSlotTile(
-                      slotNumber: index + 1,  // pass slot number to the tile
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SlotBookingPage(
+                              parkingSlotId: index + 1 + 200,
+                            ),
+                          ),
+                        );
+                      },
+                      child: ParkingSlotTile(
+                        slotNumber: index + 1 +200,  // pass slot number to the tile
+                      ),
                     );
                   },
                 ),
