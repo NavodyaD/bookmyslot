@@ -72,7 +72,7 @@ class _ParkingPageState extends State<ParkingPage> {
                   border: Border.all(color: Colors.blue, width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: GridView.builder(
+                child: ParkingSlotTile(slotNumber: 208, slotStatus: 'vehicleParked')/*GridView.builder(
                   shrinkWrap: true, // to make the gridView take only the needed space
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,  // 2 columns added in a row
@@ -92,12 +92,12 @@ class _ParkingPageState extends State<ParkingPage> {
                           ),
                         );
                       },
-                      child: ParkingSlotTile(
+                      child: ParkingSlotTile(slotStatus: 'vehicleParked',
                         slotNumber: index + 1 +200,  // pass slot number to the tile
                       ),
                     );
                   },
-                ),
+                ),*/
               ),
             ],
           ),

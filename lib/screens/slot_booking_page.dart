@@ -65,7 +65,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
     }
   }
 
-  /*void _saveParkingInfo() {
+  void _saveParkingInfo() {
     int parkingId = widget.parkingSlotId;
     String vehicleNumber = vehicleNumberController.text;
 
@@ -94,7 +94,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
       );
       print("Failed to save data: $error");
     });
-  }*/
+  }
 
 
   @override
@@ -206,8 +206,8 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 child: PrimaryAppButton(
                   buttonText: 'Book Now',
                   onPressed: () {
-                    _bookSlot();
-                    //_saveParkingInfo();
+                    //_bookSlot();
+                    _saveParkingInfo();
                   },
                 ),
               ),
