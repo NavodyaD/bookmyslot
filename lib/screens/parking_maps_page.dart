@@ -73,6 +73,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
           zoom: 8,
         ),
         markers: _markers,
+        mapType: MapType.normal,
       ),
     );
   }

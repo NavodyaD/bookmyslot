@@ -7,9 +7,12 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase only once
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,  // Use the generated options
+    options: DefaultFirebaseOptions.currentPlatform,  // Use the generated options for platform-specific configuration
   );
+
   runApp(MyApp());
 }
 

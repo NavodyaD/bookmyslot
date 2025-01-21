@@ -1,6 +1,9 @@
 import 'package:bookmyslot/widgets/primary_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+
+import '../util/save_parking_info.dart';
 
 class SlotBookingPage extends StatefulWidget {
   final int parkingSlotId;
@@ -61,6 +64,38 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
       );
     }
   }
+
+  /*void _saveParkingInfo() {
+    int parkingId = widget.parkingSlotId;
+    String vehicleNumber = vehicleNumberController.text;
+
+    saveParkingInfo(parkingId, vehicleNumber);
+  }
+
+  void saveParkingInfo(int parkingSlotId, String vehicleNumber) {
+    final databaseReference = FirebaseDatabase.instance.ref();
+
+    // Get the current date and time
+    String currentDateTime = DateTime.now().toString();
+
+    // Write to the "parkings" node in Realtime Database
+    databaseReference.child("parkings").push().set({
+      'parkingSlotId': parkingSlotId,
+      'vehicleNumber': vehicleNumber,
+      'bookingDateTime': currentDateTime,
+    }).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Parking information saved!')),
+      );
+      print("Data saved successfully");
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to save data: $error')),
+      );
+      print("Failed to save data: $error");
+    });
+  }*/
+
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +205,10 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               Center(
                 child: PrimaryAppButton(
                   buttonText: 'Book Now',
-                  onPressed: _bookSlot,
+                  onPressed: () {
+                    _bookSlot();
+                    //_saveParkingInfo();
+                  },
                 ),
               ),
             ],

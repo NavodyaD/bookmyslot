@@ -57,6 +57,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '812989379162',
     projectId: 'bookmyslot-8342f',
     storageBucket: 'bookmyslot-8342f.firebasestorage.app',
+    databaseURL: 'https://bookmyslot-8342f-default-rtdb.firebaseio.com/',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -66,6 +67,7 @@ class DefaultFirebaseOptions {
     projectId: 'bookmyslot-8342f',
     storageBucket: 'bookmyslot-8342f.firebasestorage.app',
     iosBundleId: 'com.example.bookmyslot',
+    databaseURL: 'https://bookmyslot-8342f-default-rtdb.firebaseio.com/',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
