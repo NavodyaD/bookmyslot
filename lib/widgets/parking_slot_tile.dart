@@ -37,7 +37,7 @@ class ParkingSlotTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    'lib/assets/images/car_bird_view.png',
+                    'assets/images/car_bird_view.png',
                     height: 45,
                     width: 75,
                   ),

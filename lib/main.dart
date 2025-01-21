@@ -1,4 +1,5 @@
 import 'package:bookmyslot/firebase_options.dart';
+import 'package:bookmyslot/screens/booking_success_page.dart';
 import 'package:bookmyslot/screens/parking_maps_page.dart';
 import 'package:bookmyslot/screens/parking_page.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: ParkingPage(),
+      home: BookingSuccessPage(),
     );
   }
 }

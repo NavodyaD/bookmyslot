@@ -1,3 +1,4 @@
+import 'package:bookmyslot/screens/booking_success_page.dart';
 import 'package:bookmyslot/widgets/primary_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -88,6 +89,12 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         SnackBar(content: Text('Parking information saved!')),
       );
       print("Data saved successfully");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BookingSuccessPage(),
+        ),
+      );
     }).catchError((error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to save data: $error')),
