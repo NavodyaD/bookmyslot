@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class ParkingMapPage extends StatefulWidget {
   @override
@@ -7,55 +8,14 @@ class ParkingMapPage extends StatefulWidget {
 }
 
 class _ParkingMapPageState extends State<ParkingMapPage> {
-  late GoogleMapController _mapController;
-  Set<Marker> _markers = {};
+  final List<Marker> _markers = [];
 
-  // parking location 1
-  final LatLng _galleLocation = LatLng(6.037, 80.220); // galle coordinates
-  // parking location 2
-  final LatLng _colomboLocation = LatLng(6.9271, 79.8612); // colombo coordinates
+  final LatLng _parkingLocation_1 = LatLng(6.037, 80.220); // Galle parking coordinates
+  final LatLng _parkingLocation_2 = LatLng(6.9271, 79.8612); // Colombo parking coordinates
 
   @override
   void initState() {
     super.initState();
-    _addStaticMarkers(); // add static parking markers
-  }
-
-  // Function to add static markers for 2 parking locations (galle , colombo)
-  void _addStaticMarkers() {
-    _markers.add(
-      Marker(
-        markerId: MarkerId('galle'),
-        position: _galleLocation,
-        infoWindow: InfoWindow(
-          title: 'Galle Parking',
-          snippet: 'Tap to view Galle Parking',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => GalleParkingPage()),
-            );
-          },
-        ),
-      ),
-    );
-
-    _markers.add(
-      Marker(
-        markerId: MarkerId('colombo'),
-        position: _colomboLocation,
-        infoWindow: InfoWindow(
-          title: 'Colombo Parking',
-          snippet: 'Tap to view Colombo Parking',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ColomboParkingPage()),
-            );
-          },
-        ),
-      ),
-    );
   }
 
   @override
@@ -64,22 +24,27 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
       appBar: AppBar(
         title: Text('Parking Locations'),
       ),
-      body: GoogleMap(
-        onMapCreated: (controller) {
-          _mapController = controller;
-        },
-        initialCameraPosition: CameraPosition(
-          target: _galleLocation, // default camera position - initial position
-          zoom: 8,
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(6.9271, 79.8612), // initial center location
+          initialZoom: 10.0,
         ),
-        markers: _markers,
-        mapType: MapType.normal,
+        children: [
+          TileLayer(
+            urlTemplate:
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Free OpenStreetMap tiles
+            subdomains: ['a', 'b', 'c'],
+          ),
+          MarkerLayer(
+            markers: _markers,
+          ),
+        ],
       ),
     );
   }
 }
 
-// Galle parking page
+// sample parking page - galle
 class GalleParkingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -88,13 +53,13 @@ class GalleParkingPage extends StatelessWidget {
         title: Text('Galle Parking'),
       ),
       body: Center(
-        child: Text('Welcome to Galle Parking'),
+        child: Text('This is Galle Parking Page'),
       ),
     );
   }
 }
 
-// Colombo parking page
+// sample parking page - colombo
 class ColomboParkingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -103,7 +68,7 @@ class ColomboParkingPage extends StatelessWidget {
         title: Text('Colombo Parking'),
       ),
       body: Center(
-        child: Text('Welcome to Colombo Parking'),
+        child: Text('This is Colombo Parking Page'),
       ),
     );
   }
