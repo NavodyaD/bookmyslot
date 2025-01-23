@@ -32,6 +32,7 @@ class BookingSuccessPage extends StatelessWidget {
                 Navigator.pop(context); // go back to the previous screen
               }),
             ),
+
           ],
         ),
       ),
