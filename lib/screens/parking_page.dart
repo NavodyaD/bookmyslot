@@ -1,4 +1,5 @@
 import 'package:bookmyslot/screens/slot_booking_page.dart';
+import 'package:bookmyslot/widgets/road_line.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/parking_slot_tile.dart';
@@ -13,92 +14,206 @@ class ParkingPage extends StatefulWidget {
 class _ParkingPageState extends State<ParkingPage> {
   @override
   Widget build(BuildContext context) {
+
+    final double tileWidth = (MediaQuery.of(context).size.width - 105) / 2;
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 10,
-          title: Text('You want to park?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          title: Text('You want to park bro?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
           centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.all(35),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text.rich(
-                TextSpan(
-                  text: 'Parking Name: ',
-                  style: TextStyle(fontSize: 20),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Galle Town Parking Space',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+              Text("Galle Parking Space", style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold,
+              ),),
 
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 8),
+                  Text('Cross Street, Galle Town, Galle',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.directions_car,
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 8),
+                  Text('4 Parking Slots',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on, // You can replace this with any icon you prefer
+                    color: Colors.blue, // Set the color of the icon
+                  ),
+                  SizedBox(width: 8), // A little space between the icon and text
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'Parking Charge ',
+                        style: TextStyle(fontSize: 16),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'USD 5.00',
+                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 8),
               Text.rich(
                 TextSpan(
-                  text: 'Parking Address: ',
+                  text: 'Allowed Vehicles: ',
                   style: TextStyle(fontSize: 16),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Cross Street, Galle Town, Galle',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      text: 'Car, Van, SUV',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              Text.rich(
-                TextSpan(
-                  text: 'Slots Count: ',
-                  style: TextStyle(fontSize: 16),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '4',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+
               SizedBox(height: 20),
 
               Container(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.only(top: 20, bottom: 20, left: 8, right: 8),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue, width: 2),
-                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xFFAEC5C2),
+                  border: Border.all(color: Color(0xFF7FB5B0), width: 2),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: ParkingSlotTile(slotNumber: 208, slotStatus: 'vehicleParked')/*GridView.builder(
-                  shrinkWrap: true, // to make the gridView take only the needed space
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,  // 2 columns added in a row
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SlotBookingPage(
-                              parkingSlotId: index + 1 + 200,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SlotBookingPage(
+                                  parkingSlotId: 201,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 100, // Set a fixed height for the tile
+                            width: tileWidth,  // To ensure it's split evenly
+                            child: ParkingSlotTile(
+                              slotStatus: 'vehicleParked',
+                              slotNumber: 201,
                             ),
                           ),
-                        );
-                      },
-                      child: ParkingSlotTile(slotStatus: 'vehicleParked',
-                        slotNumber: index + 1 +200,  // pass slot number to the tile
-                      ),
-                    );
-                  },
-                ),*/
-              ),
+                        ),
+                        SizedBox(width: 8,),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SlotBookingPage(
+                                  parkingSlotId: 202,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 100, // Fixed height for the tile
+                            width: tileWidth, // Same width calculation
+                            child: ParkingSlotTile(
+                              slotStatus: 'vehicleParked',
+                              slotNumber: 202,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Second row for the next two tiles
+                    SizedBox(height: 12,),
+                    RoadLineWidget(),
+                    SizedBox(height: 12,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SlotBookingPage(
+                                  parkingSlotId: 203,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 100, // Fixed height for the tile
+                            width: tileWidth, // Same width calculation
+                            child: ParkingSlotTile(
+                              slotStatus: 'vehicleParked',
+                              slotNumber: 203,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8,),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SlotBookingPage(
+                                  parkingSlotId: 204,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 100, // Fixed height for the tile
+                            width: tileWidth, // Same width calculation
+                            child: ParkingSlotTile(
+                              slotStatus: 'vehicleParked',
+                              slotNumber: 204,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+
+
+
+
             ],
           ),
         ),

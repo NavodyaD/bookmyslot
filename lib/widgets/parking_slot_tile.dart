@@ -16,7 +16,7 @@ class ParkingSlotTile extends StatelessWidget {
       stripColor = Colors.orange;
       showImage = false;
     } else if (slotStatus == 'vehicleParked') {
-      stripColor = Colors.white;
+      stripColor = Colors.black;
       showImage = true;
     } else { // 'available'
       stripColor = Colors.green;
@@ -38,17 +38,16 @@ class ParkingSlotTile extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
                     'assets/images/car_bird_view.png',
-                    height: 45,
-                    width: 75,
+                    height: 38,
+                    width: 65,
                   ),
                 ),
-              Expanded(
-                child: Column(
+              Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Slot $slotNumber',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54),
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black54),
                     ),
                     Text(
                       slotStatus == 'available'
@@ -59,7 +58,6 @@ class ParkingSlotTile extends StatelessWidget {
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black45),
                     ),
                   ],
-                ),
               ),
             ],
           ),
