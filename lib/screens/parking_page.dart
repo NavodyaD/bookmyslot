@@ -2,6 +2,7 @@ import 'package:bookmyslot/screens/slot_booking_page.dart';
 import 'package:bookmyslot/widgets/road_line.dart';
 import 'package:flutter/material.dart';
 
+import '../services/slot_services.dart';
 import '../widgets/parking_slot_tile.dart';
 
 class ParkingPage extends StatefulWidget {
@@ -12,6 +13,9 @@ class ParkingPage extends StatefulWidget {
 }
 
 class _ParkingPageState extends State<ParkingPage> {
+
+  final SlotService slotService = SlotService();
+
   @override
   Widget build(BuildContext context) {
 
@@ -65,10 +69,10 @@ class _ParkingPageState extends State<ParkingPage> {
               Row(
                 children: [
                   Icon(
-                    Icons.location_on, // You can replace this with any icon you prefer
-                    color: Colors.blue, // Set the color of the icon
+                    Icons.location_on,
+                    color: Colors.blue,
                   ),
-                  SizedBox(width: 8), // A little space between the icon and text
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text.rich(
                       TextSpan(
@@ -111,113 +115,70 @@ class _ParkingPageState extends State<ParkingPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // first 2 slots as a row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SlotBookingPage(
-                                  parkingSlotId: 201,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 100, // Set a fixed height for the tile
-                            width: tileWidth,  // To ensure it's split evenly
-                            child: ParkingSlotTile(
-                              slotStatus: 'vehicleParked',
-                              slotNumber: 201,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8,),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SlotBookingPage(
-                                  parkingSlotId: 202,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 100, // Fixed height for the tile
-                            width: tileWidth, // Same width calculation
-                            child: ParkingSlotTile(
-                              slotStatus: 'vehicleParked',
-                              slotNumber: 202,
-                            ),
-                          ),
-                        ),
+                        _buildParkingSlot(201),
+                        SizedBox(width: 8),
+                        _buildParkingSlot(202),
                       ],
                     ),
-                    // Second row for the next two tiles
-                    SizedBox(height: 12,),
+                    SizedBox(height: 12),
                     RoadLineWidget(),
-                    SizedBox(height: 12,),
+                    SizedBox(height: 12),
+                    // second 2 slots as a row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SlotBookingPage(
-                                  parkingSlotId: 203,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 100, // Fixed height for the tile
-                            width: tileWidth, // Same width calculation
-                            child: ParkingSlotTile(
-                              slotStatus: 'vehicleParked',
-                              slotNumber: 203,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8,),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SlotBookingPage(
-                                  parkingSlotId: 204,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 100, // Fixed height for the tile
-                            width: tileWidth, // Same width calculation
-                            child: ParkingSlotTile(
-                              slotStatus: 'vehicleParked',
-                              slotNumber: 204,
-                            ),
-                          ),
-                        ),
+                        _buildParkingSlot(203),
+                        SizedBox(width: 8),
+                        _buildParkingSlot(204),
                       ],
                     ),
                   ],
                 ),
-              )
-
-
-
-
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  // build the slot according to the passed slotId
+  Widget _buildParkingSlot(int slotNumber) {
+    return StreamBuilder<String>(
+      stream: slotService.getSlotStatus(slotNumber),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text('Error loading slot status'));
+        }
+
+        String slotStatus = snapshot.data ?? "available";
+
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SlotBookingPage(parkingSlotId: slotNumber),
+              ),
+            );
+          },
+          child: Container(
+            height: 100,
+            width: 100,
+            child: ParkingSlotTile(
+              slotStatus: slotStatus,
+              slotNumber: slotNumber,
+            ),
+          ),
+        );
+      },
     );
   }
 }

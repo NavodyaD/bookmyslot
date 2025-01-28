@@ -4,12 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../services/slot_services.dart';
 import '../util/save_parking_info.dart';
 
 class SlotBookingPage extends StatefulWidget {
   final int parkingSlotId;
 
   SlotBookingPage({required this.parkingSlotId});
+  final SlotService slotService = SlotService();
 
   @override
   State<SlotBookingPage> createState() => _SlotBookingPageState();
@@ -18,11 +20,13 @@ class SlotBookingPage extends StatefulWidget {
 class _SlotBookingPageState extends State<SlotBookingPage> {
   final double price = 5.00;
   late int slotId;
+  late SlotService slotService;
 
   @override
   void initState() {
     super.initState();
     slotId = widget.parkingSlotId;
+    slotService = SlotService();
   }
 
   final TextEditingController vehicleNumberController = TextEditingController();
@@ -212,9 +216,11 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               Center(
                 child: PrimaryAppButton(
                   buttonText: 'Book Now',
-                  onPressed: () {
-                    //_bookSlot();
-                    _saveParkingInfo();
+                  onPressed: ()  async {
+                    _bookSlot();
+                    //_saveParkingInfo();
+                    // When the user books the slot, update the status in the database
+                    await slotService.updateSlotStatus(slotId, 'vehicleParked');
                   },
                 ),
               ),
