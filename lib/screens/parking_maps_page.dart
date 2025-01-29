@@ -1,4 +1,5 @@
 import 'package:bookmyslot/screens/parking_page.dart';
+import 'package:bookmyslot/widgets/parking_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -25,26 +26,26 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
     _markers.addAll([
       Marker(
         point: _parkingLocation_1,
-        width: 80,
+        width: 200,
         height: 80,
         // gesture detector as marker child
         child: GestureDetector(
           onTap: () {
             _navigateToParkingLocationOne();
           },
-          child: Icon(Icons.local_parking, color: Colors.red, size: 40),
+          child: ParkingMarker(imagePath: 'assets/images/car_bird_view.png', parkingName: 'Galle Parking', vehicleCount: '2', price: 'USD 5.00'),
         ),
       ),
       Marker(
         point: _parkingLocation_2,
-        width: 80,
+        width: 200,
         height: 80,
         // gesture detector as marker child
         child: GestureDetector(
           onTap: () {
             _navigateToParkingLocationTwo();
           },
-          child: Icon(Icons.local_parking, color: Colors.blue, size: 40),
+          child: ParkingMarker(imagePath: 'assets/images/car_bird_view.png', parkingName: 'Colombo Parking', vehicleCount: '4', price: 'USD 8.00'),
         ),
       ),
     ]);
