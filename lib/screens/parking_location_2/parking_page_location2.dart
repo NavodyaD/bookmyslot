@@ -2,19 +2,22 @@ import 'package:bookmyslot/screens/slot_booking_page.dart';
 import 'package:bookmyslot/widgets/road_line.dart';
 import 'package:flutter/material.dart';
 
-import '../services/slot_services.dart';
-import '../widgets/parking_slot_tile.dart';
+import '../../services/slot_services.dart';
+import '../../widgets/parking_slot_tile.dart';
 
-class ParkingPageLoc1 extends StatefulWidget {
-  const ParkingPageLoc1({super.key});
+class ParkingPageLoc2 extends StatefulWidget {
+  const ParkingPageLoc2({super.key});
 
   @override
-  State<ParkingPageLoc1> createState() => _ParkingPageState();
+  State<ParkingPageLoc2> createState() => _ParkingPageState();
 }
 
-class _ParkingPageState extends State<ParkingPageLoc1> {
+class _ParkingPageState extends State<ParkingPageLoc2> {
 
   final SlotService slotService = SlotService();
+  final String parkingName = "Kandy Parking";
+  final String parkingAddress = "Main Street, Kandy";
+  final String price = "LKR 400";
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 10,
-          title: Text('You want to park bro?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+          title: Text('You want to park?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
           centerTitle: true,
         ),
         body: Padding(
@@ -35,7 +38,7 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Galle Parking Space", style: TextStyle(
+              Text(parkingName, style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold,
               ),),
 
@@ -47,7 +50,7 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
                     color: Colors.blue,
                   ),
                   SizedBox(width: 8),
-                  Text('Cross Street, Galle Town, Galle',
+                  Text(parkingAddress,
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -60,7 +63,7 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
                     color: Colors.blue,
                   ),
                   SizedBox(width: 8),
-                  Text('4 Parking Slots',
+                  Text('2 Parking Slots',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -80,7 +83,7 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
                         style: TextStyle(fontSize: 16),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'USD 5.00',
+                            text: price,
                             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -119,21 +122,9 @@ class _ParkingPageState extends State<ParkingPageLoc1> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildParkingSlot(201),
+                        _buildParkingSlot(427),
                         SizedBox(width: 8),
-                        _buildParkingSlot(202),
-                      ],
-                    ),
-                    SizedBox(height: 12),
-                    RoadLineWidget(),
-                    SizedBox(height: 12),
-                    // second 2 slots as a row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _buildParkingSlot(203),
-                        SizedBox(width: 8),
-                        _buildParkingSlot(204),
+                        _buildParkingSlot(428),
                       ],
                     ),
                   ],

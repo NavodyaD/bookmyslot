@@ -27,7 +27,6 @@ class HomePgParkingWid extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.only(left: 10),
-        height: 120,
         margin: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -49,8 +48,8 @@ class HomePgParkingWid extends StatelessWidget {
               ),
               child: Image.asset(
                 imagePath,
-                width: 120,
-                height: 160,
+                width: 100,
+                height: 100,
                 fit: BoxFit.contain,
               ),
             ),
@@ -63,19 +62,19 @@ class HomePgParkingWid extends StatelessWidget {
                   Text(
                     name,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: 5),
                   Text(
                     address,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: 4),
                   Text(
                     price,
                     style: TextStyle(

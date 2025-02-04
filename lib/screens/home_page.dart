@@ -1,3 +1,4 @@
+import 'package:bookmyslot/screens/parking_location_2/parking_page_location2.dart';
 import 'package:bookmyslot/screens/parking_maps_page.dart';
 import 'package:bookmyslot/screens/parking_page.dart';
 import 'package:bookmyslot/widgets/homepg_parking_wid.dart';
@@ -88,7 +89,7 @@ class HomePage extends StatelessWidget {
                   Text(
                     'Select a parking',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 22 ,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -97,6 +98,7 @@ class HomePage extends StatelessWidget {
                     'Select from map or pick manually',
                     style: TextStyle(
                       fontSize: 16,
+                      color: Colors.grey
                     ),
                   ),
 
@@ -114,7 +116,7 @@ class HomePage extends StatelessWidget {
                     },
                     child: Container(
                       width: double.infinity,
-                      height: 200,
+                      height: 180,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         image: DecorationImage(
@@ -169,8 +171,20 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: 14,),
                   Text('Parkings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   Text('Choose nearest one', style: TextStyle(color: Colors.grey),),
-                  HomePgParkingWid(imagePath: 'assets/images/car_bird_view.png', name: 'Kandy Parking', address: 'Kandy Cross Street, Kandy', price: '500 LKR', navigatePage: ParkingPage(),),
-                  HomePgParkingWid(imagePath: 'assets/images/car_bird_view.png', name: 'Galle City Parking', address: 'Galle City, Galle', price: '400 LKR', navigatePage: ParkingPage(),)
+                  HomePgParkingWid(
+                    imagePath: 'assets/images/car_bird_view.png',
+                    name: 'Kandy Parking',
+                    address: 'Kandy Cross Street, Kandy',
+                    price: '500 LKR',
+                    navigatePage: ParkingPageLoc2(),
+                  ),
+                  HomePgParkingWid(
+                    imagePath: 'assets/images/car_bird_view.png',
+                    name: 'Galle City Parking',
+                    address: 'Galle City, Galle',
+                    price: '400 LKR',
+                    navigatePage: ParkingPageLoc1(),
+                  )
                 ],
               ),
             ),

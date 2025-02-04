@@ -35,12 +35,12 @@ class ParkingMarker extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
               imagePath,
-              width: 40,
-              height: 25,
+              width: 45,
+              height: 45,
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
 
           Expanded(
             child: Column(

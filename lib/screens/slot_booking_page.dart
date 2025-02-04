@@ -116,7 +116,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(45),
+        padding: const EdgeInsets.all(38),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,17 +125,18 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 'Parking Slot ID: ${widget.parkingSlotId}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
               Text(
                 'Price: \$${price.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 20),
 
               Text(
                 'Your Vehicle Number',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 8,),
 
               TextField(
                 decoration: InputDecoration(
@@ -144,11 +145,13 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 ),
                 controller: vehicleNumberController,
               ),
+              SizedBox(height: 10,),
 
               Text(
                 'Driver Name',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 8,),
 
               TextField(
                 decoration: InputDecoration(
@@ -158,13 +161,24 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 controller: driverNameController,
               ),
 
-              SizedBox(height: 40),
+              SizedBox(height: 35),
 
               // payment dummy
-              Text(
-                'Payment Method:',
-                style: TextStyle(fontSize: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Payment Method',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Image.asset(
+                    'assets/images/visa_mscard_logo.png',
+                    width: 100,
+                    height: 50,
+                  ),
+                ],
               ),
+
               SizedBox(height: 8),
 
               TextField(
@@ -172,6 +186,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                   labelText: 'Cardholder Name',
                   border: OutlineInputBorder(),
                   hintText: 'Enter cardholder name',
+                  contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0), // Adjust vertical padding
                 ),
               ),
               SizedBox(height: 12),
@@ -181,6 +196,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                   labelText: 'Credit/Debit Card Number',
                   border: OutlineInputBorder(),
                   hintText: 'Enter card number',
+                  contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -194,6 +210,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                         labelText: 'Expiration Month',
                         border: OutlineInputBorder(),
                         hintText: 'YY/MM',
+                        contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -205,6 +222,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                         labelText: 'Expiration Year',
                         border: OutlineInputBorder(),
                         hintText: 'YYYY',
+                        contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -220,7 +238,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                     _bookSlot();
                     //_saveParkingInfo();
                     // When the user books the slot, update the status in the database
-                    await slotService.updateSlotStatus(slotId, 'vehicleParked');
+                    await slotService.updateSlotStatus(slotId, 'booked');
                   },
                 ),
               ),

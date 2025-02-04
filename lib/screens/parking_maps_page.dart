@@ -1,3 +1,4 @@
+import 'package:bookmyslot/screens/parking_location_2/parking_page_location2.dart';
 import 'package:bookmyslot/screens/parking_page.dart';
 import 'package:bookmyslot/widgets/parking_marker.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
           onTap: () {
             _navigateToParkingLocationOne();
           },
-          child: ParkingMarker(imagePath: 'assets/images/car_bird_view.png', parkingName: 'Galle Parking', vehicleCount: '2', price: 'USD 5.00'),
+          child: ParkingMarker(imagePath: 'assets/images/location_mark_img.png', parkingName: 'Galle Parking', vehicleCount: '2', price: 'USD 5.00'),
         ),
       ),
       Marker(
@@ -46,7 +47,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
           onTap: () {
             _navigateToParkingLocationTwo();
           },
-          child: ParkingMarker(imagePath: 'assets/images/car_bird_view.png', parkingName: 'Colombo Parking', vehicleCount: '4', price: 'USD 8.00'),
+          child: ParkingMarker(imagePath: 'assets/images/location_mark_img.png', parkingName: 'Colombo Parking', vehicleCount: '4', price: 'USD 8.00'),
         ),
       ),
     ]);
@@ -57,7 +58,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ParkingPage(),
+        builder: (context) => ParkingPageLoc1(),
       ),
     );
   }
@@ -67,7 +68,7 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ColomboParkingPage(),
+        builder: (context) => ParkingPageLoc2(),
       ),
     );
   }
