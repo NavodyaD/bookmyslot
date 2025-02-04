@@ -1,3 +1,4 @@
+import 'package:bookmyslot/screens/admin/admin_dashboard.dart';
 import 'package:bookmyslot/screens/parking_location_2/parking_page_location2.dart';
 import 'package:bookmyslot/screens/parking_maps_page.dart';
 import 'package:bookmyslot/screens/parking_page.dart';
@@ -42,9 +43,9 @@ class HomePage extends StatelessWidget {
                 top: 20,
                 right: 30,
                 child: IconButton(
-                  icon: Icon(Icons.search, color: Colors.white, size: 30),
+                  icon: Icon(Icons.dashboard, color: Colors.white, size: 30),
                   onPressed: () {
-
+                    _showAdminKeyDialog(context);
                   },
                 ),
               ),
@@ -191,6 +192,74 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void _showAdminKeyDialog(BuildContext context) {
+    TextEditingController pinController = TextEditingController();
+    bool isPinCorrect = true; // no error initially
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,  // dialog non-dismissible outside
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Stack(
+            children: [
+              Positioned(
+                right: 0,
+                child: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              Text('Enter Admin Key', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: pinController,
+                decoration: InputDecoration(
+                  labelText: 'Admin Key',
+                  errorText: isPinCorrect ? null : 'Incorrect PIN',
+                ),
+                obscureText: true,
+                keyboardType: TextInputType.number,
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                ),
+                onPressed: () {
+                  String enteredPin = pinController.text;
+                  if (enteredPin == '971') {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AdminDashboardPage(),
+                      ),
+                    );
+                  } else {
+                    isPinCorrect = false;
+                    Navigator.of(context).pop();
+                    _showAdminKeyDialog(context);
+                  }
+                },
+                child: Text('Continue', style: TextStyle(fontSize: 15, color: Colors.white),),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
