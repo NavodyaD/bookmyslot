@@ -1,4 +1,6 @@
 import 'package:bookmyslot/screens/parking_maps_page.dart';
+import 'package:bookmyslot/screens/parking_page.dart';
+import 'package:bookmyslot/widgets/homepg_parking_wid.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -164,6 +166,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(height: 14,),
+                  Text('Parkings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text('Choose nearest one', style: TextStyle(color: Colors.grey),),
+                  HomePgParkingWid(imagePath: 'assets/images/car_bird_view.png', name: 'Kandy Parking', address: 'Kandy Cross Street, Kandy', price: '500 LKR', navigatePage: ParkingPage(),),
+                  HomePgParkingWid(imagePath: 'assets/images/car_bird_view.png', name: 'Galle City Parking', address: 'Galle City, Galle', price: '400 LKR', navigatePage: ParkingPage(),)
                 ],
               ),
             ),

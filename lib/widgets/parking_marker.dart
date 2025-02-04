@@ -17,7 +17,7 @@ class ParkingMarker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -50,23 +50,23 @@ class ParkingMarker extends StatelessWidget {
                   parkingName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 12,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 2),
                 Text(
                   '$vehicleCount vehicles',
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 10,
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   '\$$price per hour',
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
                   ),

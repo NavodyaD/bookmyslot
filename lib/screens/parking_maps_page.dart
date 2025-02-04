@@ -10,7 +10,8 @@ class ParkingMapPage extends StatefulWidget {
 }
 
 class _ParkingMapPageState extends State<ParkingMapPage> {
-  final List<Marker> _markers = [];
+  //late final List<Marker> _markers = [];
+  List<Marker> _markers = [];
 
   final LatLng _parkingLocation_1 = LatLng(6.037, 80.220); //  coordinates
   final LatLng _parkingLocation_2 = LatLng(6.9271, 79.8612);
@@ -74,27 +75,62 @@ class _ParkingMapPageState extends State<ParkingMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Parking Locations'),
-      ),
-      body: FlutterMap(
-        options: MapOptions(
-          initialCenter: LatLng(6.9271, 79.8612), // initial center location
-          initialZoom: 10.0,
-        ),
+      body: Stack(
         children: [
-          TileLayer(
-            urlTemplate:
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Free OpenStreetMap tiles
-            subdomains: ['a', 'b', 'c'],
+            FlutterMap(
+            options: MapOptions(
+              initialCenter: LatLng(6.9271, 79.8612), // initial center location
+              initialZoom: 10.0,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate:
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Free OpenStreetMap tiles
+                subdomains: ['a', 'b', 'c'],
+              ),
+              MarkerLayer(
+                markers: _markers,
+              ),
+            ],
           ),
-          MarkerLayer(
-            markers: _markers,
+          Positioned(
+            top: 30,
+            left: 25,
+            right: 25,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              ),
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.menu, color: Colors.black),
+                    Text(
+                      'Parkings Map',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(Icons.search, color: Colors.black),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ],
+        ]
       ),
     );
   }
+
+
 }
 
 // sample parking page - colombo
